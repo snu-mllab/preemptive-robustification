@@ -1,7 +1,4 @@
-fileId=1_Q8eX5FMcFYIz9AB3NltOvflpAk34cZh
+fileId=1qu7GeMLXZ50qniDjD5Oh2-q8zRiI0b98
 fileName=ckpt.pt
 
-echo "Downloading models"
-
 gdown "https://drive.google.com/uc?id=${fileId}" -O ${fileName}
-
