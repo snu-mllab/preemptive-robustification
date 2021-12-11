@@ -97,7 +97,7 @@ python attack_grey_box.py --config ./configs/cifar10_l2_rand.yaml
 
 ## White-box attacks on preemptively robustified images  
 
-To conduct grey-box attacks on preemptively robustified images, run the following commands. You can specify the attack setting by changing ```Attack (eval)``` section in each yaml file. The default attack setting is 20-step PGD.
+To conduct white-box attacks on preemptively robustified images, run the following commands. You can specify the attack setting by changing ```Attack (eval)``` section in each yaml file. The default attack setting is 20-step PGD.
 
 ### 1. ℓ<sub>2</sub> threat model, ε = δ = 0.5
 
