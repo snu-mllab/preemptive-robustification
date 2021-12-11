@@ -20,14 +20,14 @@ Download the CIFAR-10 dataset from https://www.cs.toronto.edu/~kriz/cifar.html a
 
 ### 1. ℓ<sub>2</sub> threat model, ε = δ = 0.5
 
-Run the following command.
+Run the following command:
 ```bash
 python train.py --config ./configs/cifar10_l2_model.yaml
 ```
 
 ### 2. ℓ<sub>∞</sub> threat model, ε = δ = 8/255
 
-Run the following command.
+Run the following command:
 ```bash
 python train.py --config ./configs/cifar10_linf_model.yaml
 ```
@@ -43,19 +43,18 @@ We also provide a pre-trained checkpoint for model with randomized smoothing.
 
 Shell scripts for downloading the models are located in ```./checkpoints/cifar10/wideresent/[train_type]/download.sh```. You can run each script to download a checkpoint named ```ckpt.pt```. To download all the checkpoints, run ```download_all_models.sh```.
 
-## Generating preemptively robustified images and and their reconstructions
+## Preemptive image robustification and reconstruction
 
-### 1. $\ell_2$ threat model, $\epsilon = \delta = 0.5$
+To generate preepmtive roobust images and their reconstruction, run the following commands below.
+### 1. ℓ<sub>2</sub> threat model, ε = δ = 0.5
 
-Run the following command.
 ```bash
 python robustify.py --config ./configs/cifar10_l2.yaml
 python reconstruct.py --config ./configs/cifar10_l2.yaml
 ```
 
-### 2. $\ell_\infty$ threat model, $\epsilon = \delta = 8/255$
+### 2. ℓ<sub>∞</sub> threat model, ε = δ = 8/255
 
-Run the following command.
 ```bash
 python robustify.py --config ./configs/cifar10_linf.yaml
 python reconstruct.py --config ./configs/cifar10_linf.yaml
