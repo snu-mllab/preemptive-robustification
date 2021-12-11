@@ -28,7 +28,7 @@ class PreemptRobustLinf:
         self.num_steps = num_steps
         self.random_starts = random_starts
 
-        # Preemptively robustification
+        # Preemptive robustification
         self.delta = delta
         self.lr = lr
     
