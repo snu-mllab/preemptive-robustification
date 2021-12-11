@@ -68,14 +68,13 @@ python reconstruct.py --config ./configs/cifar10_linf.yaml
 
 ### 3. ℓ<sub>2</sub> threat model, smoothed network, ε = δ = 0.5
 
-Run the following command.
 ```bash
 python robustify.py --config ./configs/cifar10_l2_rand.yaml
 python reconstruct.py --config ./configs/cifar10_l2_rand.yaml
 ```
 ## Grey-box attacks on preemptively robustified images
 
-To conduct grey-box attacks on preemptively robustified images, run the following commands. You can specify the attack settings by modifying the ```Evaluation``` section in each yaml file. The default attack setting is 20-step PGD.
+To conduct grey-box attacks on preemptively robustified images, run the following commands. You can specify attack type by changing ```attack_type_eval``` in each yaml file.
 
 ### 1. ℓ<sub>2</sub> threat model, ε = δ = 0.5
 
@@ -97,7 +96,7 @@ python attack_grey_box.py --config ./configs/cifar10_l2_rand.yaml
 
 ## White-box attacks on preemptively robustified images  
 
-To conduct white-box attacks on preemptively robustified images, run the following commands. You can specify the attack setting by modifying ```Evaluation``` section in each yaml file. The default attack setting is 20-step PGD.
+To conduct white-box attacks on preemptively robustified images, run the following commands. You can specify attack type and its perturbation size by changing ```attack_type_eval``` and ```wbox_epsilon_p``` in each yaml file.
 
 ### 1. ℓ<sub>2</sub> threat model, ε = δ = 0.5
 
