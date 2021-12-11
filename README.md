@@ -4,13 +4,13 @@ This is the code for the paper "Preemptive Image Robustification for Protecting 
 
 ## Requirements
 
-- python (3.7)
-- pytorch (1.7.1)
-- torchvision (0.8.2)
-- CUDA
-- numpy
-- gdown
-- yaml
+All Python packages required are listed in `requirements.txt`. To install these packages, run the following commands:  
+
+```bash
+conda create -n preemp-robust python=3.7
+conda activate preemp-robust
+pip install -r requirements.txt
+```
 
 ## Preparing CIFAR-10 data
 
