@@ -19,16 +19,16 @@ lr: 0.001
 num_iters: 100
 hessian: false
 
-# Attack 
 attack_type: 'PGDAttackL2'
 epsilon: 0.5
 step_size: 0.125
 num_steps: 20
 random_starts: 1
 
-# Attack (eval)
+# Evaluation
 batch_size_eval: 50
 attack_type_eval: 'PGDAttackL2'
-epsilon_eval: 0.5
 num_steps_eval: 20
-wbox_epsilon: 0.5
+bbox_epsilon: 0.5  # for black-box attack
+wbox_epsilon_p: 0.5  # for white-box attack, choose one from {0.125, 0.25, 0.375, 0.5} 
+wbox_epsilon: 0.5  # for white-bos attack

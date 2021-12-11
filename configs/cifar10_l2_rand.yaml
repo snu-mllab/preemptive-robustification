@@ -4,6 +4,7 @@ batch_size: 50
 start: 0
 num_images: 1000
 rand: true
+scale: 0.1
 
 # Dataset
 data_type: 'CIFAR10'
@@ -19,20 +20,18 @@ lr: 0.005
 num_iters: 100
 hessian: false
 
-# Attack
 attack_type: 'PGDAttackL2Rand'
 epsilon: 0.5
 step_size: 0.125
 num_steps: 20
 random_starts: 1
-scale: 0.1
 num_samples: 5
 
-# Attack (eval)
+# Evaluation
 batch_size_eval: 5
 attack_type_eval: 'PGDAttackL2Rand'
-epsilon_eval: 0.5
 num_steps_eval: 20
-scale_eval: 0.1
 num_samples_eval: 50
-wbox_epsilon: 0.5
+bbox_epsilon: 0.5  # for black-box attack
+wbox_epsilon_p: 0.5  # for white-box attack, choose one from {0.125, 0.25, 0.375, 0.5} 
+wbox_epsilon: 0.5  # for white-bos attack

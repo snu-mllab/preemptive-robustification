@@ -53,8 +53,12 @@ if __name__ == '__main__':
     start = args['start']
     end = args['start'] + args['num_images']
     
-    total_inputs_rob = np.load(os.path.join(output_dir, 'inputs_rob_{}_{}.npy'.format(start, end))) 
-    total_targets = np.load(os.path.join(output_dir, 'targets_{}_{}.npy'.format(start, end))) 
+    total_inputs_rob = np.load(
+        os.path.join(output_dir, 'inputs_rob_{}_{}.npy'.format(start, end))
+    ) 
+    total_targets = np.load(
+        os.path.join(output_dir, 'targets_{}_{}.npy'.format(start, end))
+    ) 
     
     # Create model
     print('\nCreating model')
@@ -70,15 +74,21 @@ if __name__ == '__main__':
     # Create attack
     attack_class = getattr(sys.modules[__name__], args['attack_type_eval'])
     if not args['rand']:
-        attack = attack_class(model, epsilon=args['epsilon_eval'], 
-                              step_size=5*args['epsilon_eval']/args['num_steps_eval'], 
-                              num_steps=args['num_steps_eval'])
+        attack = attack_class(
+            model, 
+            epsilon=args['bbox_epsilon'],                  
+            step_size=5*args['epsilon_eval']/args['num_steps_eval'], 
+            num_steps=args['num_steps_eval']
+        )
     else:
-        attack = attack_class(model, epsilon=args['epsilon_eval'], 
-                              step_size=5*args['epsilon_eval']/args['num_steps_eval'], 
-                              num_steps=args['num_steps_eval'],
-                              scale=args['scale_eval'],
-                              num_samples=args['num_samples_eval'])
+        attack = attack_class(
+            model, 
+            epsilon=args['bbox_epsilon'], 
+            step_size=5*args['bbox_epsilon']/args['num_steps_eval'], 
+            num_steps=args['num_steps_eval'],
+            scale=args['scale'],
+            num_samples=args['num_samples_eval']
+        )
     
     # Logger
     acc_meter = AverageMeter('acc', ':.4f')
@@ -110,13 +120,19 @@ if __name__ == '__main__':
                 outputs_rob = model(inputs_rob)
             preds_rob = torch.max(outputs_rob, dim=1)[1]
         else:
-            preds_rob = evaluate_rand(model, inputs_rob, scale=args['scale'], num_samples_test=50)
+            preds_rob = evaluate_rand(
+                model, 
+                inputs_rob, 
+                scale=args['scale'], 
+                num_samples_test=50
+            )
 
         corrects = (preds_rob == targets).long()
         num_corrects = corrects.sum().item()
         acc = num_corrects / targets.size(0)
         acc_meter.update(acc, targets.size(0))
         
+        # Run attack
         inputs_adv = attack(inputs_rob, targets, detach=True)
         
         if not args['rand']:
@@ -124,7 +140,12 @@ if __name__ == '__main__':
                 outputs_adv = model(inputs_adv)
             preds_adv = torch.max(outputs_adv, dim=1)[1]
         else:
-            preds_adv = evaluate_rand(model, inputs_adv, scale=args['scale'], num_samples_test=50)
+            preds_adv = evaluate_rand(
+                model, 
+                inputs_adv, 
+                scale=args['scale'], 
+                num_samples_test=50
+            )
         
         corrects_adv = (preds_adv == targets).long()
         num_corrects_adv = corrects_adv.sum().item()
