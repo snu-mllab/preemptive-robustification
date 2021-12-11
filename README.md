@@ -4,7 +4,7 @@ This is the code for reproducing the results of the paper "Preemptive Image Robu
 
 ## Requirements
 
-All Python packages required are listed in `requirements.txt`. To install these packages, run the following commands:  
+All Python packages required are listed in `requirements.txt`. To install these packages, run the following commands.  
 
 ```bash
 conda create -n preemp-robust python=3.7
@@ -16,21 +16,9 @@ pip install -r requirements.txt
 
 Download the CIFAR-10 dataset from https://www.cs.toronto.edu/~kriz/cifar.html and place it a directory ```./data```.
 
-## Training a preemptively robust classifier
 
-### 1. ℓ<sub>2</sub> threat model, ε = δ = 0.5
+## Pretrained models
 
-Run the following command:
-```bash
-python train.py --config ./configs/cifar10_l2_model.yaml
-```
-
-### 2. ℓ<sub>∞</sub> threat model, ε = δ = 8/255
-
-Run the following command:
-```bash
-python train.py --config ./configs/cifar10_linf_model.yaml
-```
 We provide pre-trained checkpoints for adversarially trained model and preemptively robust model.
 
 - ```adv_l2```: $\ell_2$ adversarially trained model with early stopping
@@ -38,12 +26,29 @@ We provide pre-trained checkpoints for adversarially trained model and preemptiv
 - ```preempt_robust_l2```: $\ell_2$ preemptively robust model
 - ```preempt_robust_linf```: $\ell_\infty$ preemptively robust model
 
-We also provide a pre-trained checkpoint for model with randomized smoothing.
+We also provide a pre-trained checkpoint for a model with randomized smoothing.
 - ```gaussian_0.1```: model trained with additive Gaussian noises ($\sigma=0.1$)
 
-Shell scripts for downloading the models are located in ```./checkpoints/cifar10/wideresent/[train_type]/download.sh```. You can run each script to download a checkpoint named ```ckpt.pt```. To download all the checkpoints, run ```download_all_models.sh```.
+Shell scripts for downloading these checkpoint are located in ```./checkpoints/cifar10/wideresent/[train_type]/download.sh```. You can run each script to download a checkpoint named ```ckpt.pt```. To download all the checkpoints, run ```download_all_models.sh```.
 
-## Preemptive image robustification and reconstruction
+
+## Preemptively robust training
+
+To train preemptively robust classifiers, run the following commands.
+
+### 1. ℓ<sub>2</sub> threat model, ε = δ = 0.5
+
+```bash
+python train.py --config ./configs/cifar10_l2_model.yaml
+```
+
+### 2. ℓ<sub>∞</sub> threat model, ε = δ = 8/255
+
+```bash
+python train.py --config ./configs/cifar10_linf_model.yaml
+```
+
+## Preemptive robustification and reconstruction algorithms
 
 To generate preepmtive roobust images and their reconstruction, run the following commands below.
 ### 1. ℓ<sub>2</sub> threat model, ε = δ = 0.5
