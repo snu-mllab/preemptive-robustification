@@ -21,13 +21,13 @@ Download the CIFAR-10 dataset from https://www.cs.toronto.edu/~kriz/cifar.html a
 
 We provide pre-trained checkpoints for adversarially trained model and preemptively robust model.
 
-- ```adv_l2```: $\ell_2$ adversarially trained model with early stopping
-- ```adv_linf```: $\ell_\infty$ adversarially trained model with early stopping
-- ```preempt_robust_l2```: $\ell_2$ preemptively robust model
-- ```preempt_robust_linf```: $\ell_\infty$ preemptively robust model
+- ```adv_l2```: ℓ<sub>2</sub> adversarially trained model with early stopping
+- ```adv_linf```: ℓ<sub>∞</sub>  adversarially trained model with early stopping
+- ```preempt_robust_l2```: ℓ<sub>2</sub> preemptively robust model
+- ```preempt_robust_linf```: ℓ<sub>∞</sub> preemptively robust model
 
 We also provide a pre-trained checkpoint for a model with randomized smoothing.
-- ```gaussian_0.1```: model trained with additive Gaussian noises ($\sigma=0.1$)
+- ```gaussian_0.1```: model trained with additive Gaussian noises (σ = 0.1)
 
 Shell scripts for downloading these checkpoint are located in ```./checkpoints/cifar10/wideresent/[train_type]/download.sh```. You can run each script to download a checkpoint named ```ckpt.pt```. To download all the checkpoints, run ```download_all_models.sh```.
 
