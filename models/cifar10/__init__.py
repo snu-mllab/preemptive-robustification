@@ -1,0 +1,2 @@
+from .wideresnet import WideResNet
+

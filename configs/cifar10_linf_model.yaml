@@ -1,0 +1,14 @@
+# Model
+train_type: 'preempt_robust_linf'
+
+# Attack 
+attack_type: 'PGDAttackLinf'
+epsilon: 0.03137
+step_size: 0.00784
+num_steps: 10
+
+# Defense
+defense_type: 'PGDAttackLinf'
+delta: 0.03137
+lr: 0.03137
+num_iters: 1

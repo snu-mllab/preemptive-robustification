@@ -1,0 +1,34 @@
+# Experiment
+seed: 0
+batch_size: 50
+start: 0
+num_images: 1000
+rand: false
+
+# Dataset
+data_type: 'CIFAR10'
+
+# Model
+model_type: 'WideResNet'
+train_type: 'preempt_robust_l2'
+
+# Preemptive robustification
+defense_type: 'PreemptRobustL2'
+delta: 0.5
+lr: 0.001
+num_iters: 100
+hessian: false
+
+# Attack 
+attack_type: 'PGDAttackL2'
+epsilon: 0.5
+step_size: 0.125
+num_steps: 20
+random_starts: 1
+
+# Attack (eval)
+batch_size_eval: 50
+attack_type_eval: 'PGDAttackL2'
+epsilon_eval: 0.5
+num_steps_eval: 20
+wbox_epsilon: 0.5

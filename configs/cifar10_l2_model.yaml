@@ -1,0 +1,14 @@
+# Model
+train_type: 'preempt_robust_l2'
+
+# Attack 
+attack_type: 'PGDAttackL2'
+epsilon: 0.5
+step_size: 0.125
+num_steps: 10
+
+# Defense
+defense_type: 'PGDAttackL2'
+delta: 0.5
+lr: 0.5
+num_iters: 1
