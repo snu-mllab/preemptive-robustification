@@ -7,8 +7,8 @@ This is the code for reproducing the results of the paper "Preemptive Image Robu
 All Python packages required are listed in `requirements.txt`. To install these packages, run the following commands.  
 
 ```bash
-conda create -n preemp-robust python=3.7
-conda activate preemp-robust
+conda create -n preempt-robust python=3.7
+conda activate preempt-robust
 pip install -r requirements.txt
 ```
 
@@ -50,7 +50,8 @@ python train.py --config ./configs/cifar10_linf_model.yaml
 
 ## Preemptive robustification and reconstruction algorithms
 
-To generate preepmtive roobust images and their reconstruction, run the following commands below.
+To generate preepmtive roobust images and their reconstruction, run the following commands. You can specify the classifier used for generating preemptively robust images by changing `train_type` in each yaml file.
+
 ### 1. ℓ<sub>2</sub> threat model, ε = δ = 0.5
 
 ```bash
@@ -72,8 +73,6 @@ Run the following command.
 python robustify.py --config ./configs/cifar10_l2_rand.yaml
 python reconstruct.py --config ./configs/cifar10_l2_rand.yaml
 ```
-You can specify the classifier used for generating preemptively robust images by changing `train_type` in each yaml file.
-
 ## Grey-box attacks on preemptively robustified images
 
 To conduct grey-box attacks on preemptively robustified images, run the following commands. You can specify the attack settings by changing the Attack (eval) section in each yaml file. The default attack setting is 20-step PGD.
