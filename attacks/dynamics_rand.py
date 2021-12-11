@@ -3,7 +3,14 @@ import torch.nn as nn
 
 
 class DynamicsRand(nn.Module):
-    def __init__(self, model, epsilon, step_size, scale, num_samples):
+    def __init__(
+        self, 
+        model, 
+        epsilon, 
+        step_size, 
+        scale, 
+        num_samples
+    ):
         super(DynamicsRand, self).__init__()
 
         # Network
@@ -16,7 +23,14 @@ class DynamicsRand(nn.Module):
         self.scale = scale
         self.num_samples = num_samples
 
-    def forward(self, x_orig, x, y, create_graph=False, targeted=False):
+    def forward(
+        self, 
+        x_orig, 
+        x, 
+        y, 
+        create_graph=False, 
+        targeted=False
+    ):
         # Compute the loss and the gradient
         # If you want to add the gradient into the computational graph, set create_graph = True
         x_noise = x.unsqueeze(1).repeat(1, self.num_samples, 1, 1, 1).view(
@@ -48,7 +62,8 @@ class DynamicsRand(nn.Module):
 
 class L2DynamicsRand(DynamicsRand):
     def step(self, x, g):
-        g_norm = torch.norm(g.view(g.shape[0], -1), dim=1).view(-1, *([1] * (len(x.shape) - 1)))
+        g_norm = torch.norm(g.view(g.shape[0], -1), 
+                            dim=1).view(-1, *([1] * (len(x.shape) - 1)))
         scaled_g = g / (g_norm + 1e-10)
         x_next = x + self.step_size * scaled_g
         return x_next
@@ -60,6 +75,6 @@ class L2DynamicsRand(DynamicsRand):
         return x_proj
 
     def random_perturb(self, x):
-        noise = (torch.rand_like(x) - 0.5).renorm(p=2, dim=0, maxnorm=self.epsilon)
+        noise = (torch.rand_like(x) - 0.5).renorm(p=2, dim=0, 
+                                                  maxnorm=self.epsilon)
         return torch.clamp(x + noise, 0, 1)
-

@@ -52,7 +52,9 @@ if __name__ == '__main__':
     print('\nLoading dataset')
     start = args['start']
     end = args['start'] + args['num_images']
-    total_inputs_rob = np.load(os.path.join(output_dir, 'inputs_rob_{}_{}.npy'.format(start, end))) 
+    total_inputs_rob = np.load(
+        os.path.join(output_dir, 'inputs_rob_{}_{}.npy'.format(start, end))
+    ) 
     
     # Create model
     print('\nCreating model')
@@ -68,16 +70,31 @@ if __name__ == '__main__':
     # Create defense
     defense_class = getattr(sys.modules[__name__], args['defense_type'])
     if not args['rand']:
-        defense = defense_class(model=model, attack_type=args['attack_type'], 
-                                epsilon=args['epsilon'], step_size=args['step_size'], 
-                                num_steps=args['num_steps'], random_starts=args['random_starts'],
-                                delta=args['delta'], lr=args['lr'], hessian=args['hessian'])
+        defense = defense_class(
+            model=model, 
+            attack_type=args['attack_type'], 
+            epsilon=args['epsilon'],
+            step_size=args['step_size'], 
+            num_steps=args['num_steps'],
+            random_starts=args['random_starts'],
+            delta=args['delta'],
+            lr=args['lr'],
+            hessian=args['hessian']
+        )
     else:
-        defense = defense_class(model=model, attack_type=args['attack_type'], 
-                                epsilon=args['epsilon'], step_size=args['step_size'], 
-                                num_steps=args['num_steps'], random_starts=args['random_starts'],
-                                delta=args['delta'], lr=args['lr'], hessian=args['hessian'],
-                                scale=args['scale'], num_samples=args['num_samples'])
+        defense = defense_class(
+            model=model, 
+            attack_type=args['attack_type'], 
+            epsilon=args['epsilon'], 
+            step_size=args['step_size'], 
+            num_steps=args['num_steps'],
+            random_starts=args['random_starts'],
+            delta=args['delta'],
+            lr=args['lr'],
+            hessian=args['hessian'],
+            scale=args['scale'],
+            num_samples=args['num_samples']
+        )
 
     # Reconstruct original image
     num_images = len(total_inputs_rob)
@@ -96,12 +113,18 @@ if __name__ == '__main__':
         inputs_rob = inputs_rob.cuda()
         
         print('\nReconstructing original images') 
+        
         if not args['rand']:
             with torch.no_grad():
                 outputs_rob = model(inputs_rob)
             preds_rob = torch.max(outputs_rob, dim=1)[1]
         else:
-            preds_rob = evaluate_rand(model, inputs_rob, scale=args['scale'], num_samples_test=50)
+            preds_rob = evaluate_rand(
+                model, 
+                inputs_rob, 
+                scale=args['scale'], 
+                num_samples_test=50
+            )
 
         defense.initialize(inputs_rob, preds_rob, rec=True)
         for i in range(args['num_iters']):
@@ -113,6 +136,7 @@ if __name__ == '__main__':
             else np.concatenate([total_inputs_rec, inputs_rec], axis=0)
    
     print('\nSaving')
+    
     np.save(
         os.path.join(output_dir, 'inputs_rec_{}_{}.npy'.format(
             args['start'], args['start'] + args['num_images'])), 

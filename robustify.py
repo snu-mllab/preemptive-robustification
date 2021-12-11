@@ -66,16 +66,31 @@ if __name__ == '__main__':
     # Create defense
     defense_class = getattr(sys.modules[__name__], args['defense_type'])
     if not args['rand']:
-        defense = defense_class(model=model, attack_type=args['attack_type'], 
-                                epsilon=args['epsilon'], step_size=args['step_size'], 
-                                num_steps=args['num_steps'], random_starts=args['random_starts'],
-                                delta=args['delta'], lr=args['lr'], hessian=args['hessian'])
+        defense = defense_class(
+            model=model, 
+            attack_type=args['attack_type'], 
+            epsilon=args['epsilon'], 
+            step_size=args['step_size'], 
+            num_steps=args['num_steps'], 
+            random_starts=args['random_starts'],
+            delta=args['delta'], 
+            lr=args['lr'], 
+            hessian=args['hessian']
+        )
     else:
-        defense = defense_class(model=model, attack_type=args['attack_type'], 
-                                epsilon=args['epsilon'], step_size=args['step_size'], 
-                                num_steps=args['num_steps'], random_starts=args['random_starts'],
-                                delta=args['delta'], lr=args['lr'], hessian=args['hessian'],
-                                scale=args['scale'], num_samples=args['num_samples'])
+        defense = defense_class(
+            model=model, 
+            attack_type=args['attack_type'], 
+            epsilon=args['epsilon'], 
+            step_size=args['step_size'], 
+            num_steps=args['num_steps'], 
+            random_starts=args['random_starts'],
+            delta=args['delta'], 
+            lr=args['lr'],
+            hessian=args['hessian'],
+            scale=args['scale'], 
+            num_samples=args['num_samples']
+        )
 
     # Reconstruct original image
     count = 0
@@ -93,15 +108,22 @@ if __name__ == '__main__':
         
         # Infer labels
         inputs, targets = inputs.cuda(), targets.cuda()    
+        
         if not args['rand']:
             with torch.no_grad():
                 outputs = model(inputs)
             preds = torch.max(outputs, dim=1)[1]
         else:
-            preds = evaluate_rand(model, inputs, scale=args['scale'], num_samples_test=50)
+            preds = evaluate_rand(
+                model, 
+                inputs, 
+                scale=args['scale'], 
+                num_samples_test=50
+            )
 
         # Generate preemptively robustified images
         print('\nGenerating preemptively robustified images')
+        
         defense.initialize(inputs, preds, rec=False)
         for i in range(args['num_iters']):
             defense.update()
@@ -122,6 +144,7 @@ if __name__ == '__main__':
             break
    
     print('\nSaving')
+    
     np.save(
         os.path.join(output_dir, 'inputs_{}_{}.npy'.format(
             args['start'], args['start'] + args['num_images'])), 

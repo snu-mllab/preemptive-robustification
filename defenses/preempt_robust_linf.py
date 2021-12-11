@@ -5,10 +5,19 @@ import torch
 import torch.nn as nn
 
 
-class PreemptRobustLinf(object):
-    def __init__(self, model,
-                 attack_type, epsilon, step_size, num_steps, random_starts,
-                 delta, lr, **kwargs):
+class PreemptRobustLinf:
+    def __init__(
+        self, 
+        model,
+        attack_type, 
+        epsilon, 
+        step_size, 
+        num_steps, 
+        random_starts,
+        delta, 
+        lr, 
+        **kwargs
+    ):
         # Network
         self.model = model
         self.criterion = nn.CrossEntropyLoss(reduction='none').cuda()
@@ -40,8 +49,9 @@ class PreemptRobustLinf(object):
         start = time.time()
 
         # Compute the distance
-        dist = torch.mean(torch.amax(torch.abs(self.transform_inv(self.x, self.x_rob) - self.x).view(self.x.size(0), -1), dim=1))
-
+        dist = torch.abs(self.transform_inv(self.x, self.x_rob) - self.x)
+        dist = torch.mean(torch.amax(dist.view(self.x.size(0), -1), dim=1))
+        
         # Run attack
         x_t = self.x_rob.clone().detach().requires_grad_(True)
         x = self.transform_inv(self.x, x_t)
@@ -52,7 +62,8 @@ class PreemptRobustLinf(object):
 
         for i in range(max(self.random_starts, 1)):
             x_adv = self.attack(
-                x, y,
+                x, 
+                y,
                 random_start=(self.random_starts > 0)
             )
 
@@ -78,7 +89,8 @@ class PreemptRobustLinf(object):
 
         # Print
         print('iter: {}, loss: {:.4f}, dist: {:.4f}, time: {:.4f}'.format(
-            self.iter, total_loss.item(), dist.item(), end - start))
+            self.iter, total_loss.item(), dist.item(), end - start)
+        )
         
         self.iter += 1
 

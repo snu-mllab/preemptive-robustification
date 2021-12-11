@@ -1,8 +1,14 @@
 import torch
 import torch.nn as nn
 
+
 class Dynamics(nn.Module):
-    def __init__(self, model, epsilon, step_size):
+    def __init__(
+        self, 
+        model, 
+        epsilon, 
+        step_size
+    ):
         super(Dynamics, self).__init__()
 
         # Network
@@ -13,7 +19,14 @@ class Dynamics(nn.Module):
         self.epsilon = epsilon
         self.step_size = step_size
 
-    def forward(self, x_orig, x, y, create_graph=False, targeted=False):
+    def forward(
+        self, 
+        x_orig, 
+        x, 
+        y, 
+        create_graph=False, 
+        targeted=False
+    ):
         # Compute the loss and the gradient
         # If you want to add the gradient into the computational graph, set create_graph = True
         output = self.model(x)
@@ -38,7 +51,8 @@ class Dynamics(nn.Module):
 
 class L2Dynamics(Dynamics):
     def step(self, x, g):
-        g_norm = torch.norm(g.view(g.shape[0], -1), dim=1).view(-1, *([1] * (len(x.shape) - 1)))
+        g_norm = torch.norm(g.view(g.shape[0], -1), 
+                            dim=1).view(-1, *([1] * (len(x.shape) - 1)))
         scaled_g = g / (g_norm + 1e-10)
         x_next = x + self.step_size * scaled_g
         return x_next
@@ -50,7 +64,8 @@ class L2Dynamics(Dynamics):
         return x_proj
 
     def random_perturb(self, x):
-        noise = (torch.rand_like(x) - 0.5).renorm(p=2, dim=0, maxnorm=self.epsilon)
+        noise = (torch.rand_like(x) - 0.5).renorm(p=2, dim=0, 
+                                                  maxnorm=self.epsilon)
         return torch.clamp(x + noise, 0, 1)
 
 

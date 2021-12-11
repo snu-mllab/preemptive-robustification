@@ -6,10 +6,20 @@ import torch.nn as nn
 from attacks import *
 
 
-class PreemptRobustL2(object):
-    def __init__(self, model,
-                 attack_type, epsilon, step_size, num_steps, random_starts,
-                 delta, lr, hessian=False, **kwargs):
+class PreemptRobustL2:
+    def __init__(
+        self, 
+        model,
+        attack_type, 
+        epsilon, 
+        step_size, 
+        num_steps, 
+        random_starts,
+        delta, 
+        lr, 
+        hessian=False, 
+        **kwargs
+    ):
         # Network
         self.model = model
         self.criterion = nn.CrossEntropyLoss(reduction='none').cuda()
@@ -26,7 +36,8 @@ class PreemptRobustL2(object):
         self.hessian = hessian
     
     def random_perturb(self, x):
-        noise = (torch.rand_like(x) - 0.5).renorm(p=2, dim=0, maxnorm=self.delta)
+        noise = (torch.rand_like(x) - 0.5).renorm(p=2, dim=0, 
+                                                  maxnorm=self.delta)
         return torch.clamp(x + noise, 0, 1)
 
     def initialize(self, x, y, rec=False):
@@ -40,7 +51,9 @@ class PreemptRobustL2(object):
         start = time.time()
 
         # Compute the distance
-        dist = torch.mean(torch.norm((self.x_rob - self.x).view(self.x.shape[0], -1), dim=1))
+        dist = torch.mean(
+            torch.norm((self.x_rob - self.x).view(self.x.shape[0], -1), dim=1)
+        )
 
         # Run attack
         x = self.x_rob.clone().detach().requires_grad_(True)
@@ -77,7 +90,8 @@ class PreemptRobustL2(object):
 
         # Print
         print('Iter: {}, Loss: {:.4f}, Dist: {:.4f}, Time: {:.4f}'.format(
-            self.iter, total_loss.item(), dist.item(), end - start))
+            self.iter, total_loss.item(), dist.item(), end - start)
+        )
         
         self.iter += 1
     
@@ -89,4 +103,3 @@ class PreemptRobustL2(object):
         diff = diff.renorm(p=2, dim=0, maxnorm=self.delta)
         x_proj = torch.clamp(x_orig + diff, 0, 1)
         return x_proj
-        

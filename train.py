@@ -257,7 +257,8 @@ if __name__ == '__main__':
         
         # Logging
         print('xent {:.3f}, acc: {:.3f}, xent_adv: {:.3f}, acc_adv: {:.3f}'.format(
-            xent_meter.avg, acc_meter.avg, xent_adv_meter.avg, acc_adv_meter.avg))
+            xent_meter.avg, acc_meter.avg, xent_adv_meter.avg, acc_adv_meter.avg)
+        )
             
         # Save checkpoint
         if epoch % args['save_every'] == 0:
