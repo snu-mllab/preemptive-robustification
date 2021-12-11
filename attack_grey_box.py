@@ -77,7 +77,7 @@ if __name__ == '__main__':
         attack = attack_class(
             model, 
             epsilon=args['bbox_epsilon'],                  
-            step_size=5*args['epsilon_eval']/args['num_steps_eval'], 
+            step_size=5*args['bbox_epsilon']/args['num_steps_eval'], 
             num_steps=args['num_steps_eval']
         )
     else:
