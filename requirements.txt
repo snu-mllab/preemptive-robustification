@@ -1,4 +1,4 @@
 gdown
 numpy
+pyyaml
 torch==1.7.1
-yaml
