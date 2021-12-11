@@ -31,7 +31,7 @@ We provide pre-trained checkpoints for adversarially trained model and preemptiv
 We also provide a pre-trained checkpoint for a model with randomized smoothing.
 - ```gaussian_0.1```: model trained with additive Gaussian noises (σ = 0.1)
 
-Shell scripts for downloading these checkpoint are located in ```./checkpoints/cifar10/wideresent/[train_type]/download.sh```. You can run each script to download a checkpoint named ```ckpt.pt```. To download all the checkpoints, run ```download_all_models.sh```.
+Shell scripts for downloading these checkpoint are located in ```./checkpoints/cifar10/wideresent/[train_type]/download.sh```. You can run each script to download a checkpoint named ```ckpt.pt```. To download all the checkpoints, run ```download_all_ckpts.sh```. You can delete all the checkpoints by running ```delete_all_ckpts.sh```.
 
 
 ## Preemptively robust training
