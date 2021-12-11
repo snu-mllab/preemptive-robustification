@@ -1,0 +1,4 @@
+gdown
+numpy
+torch==1.7.1
+yaml

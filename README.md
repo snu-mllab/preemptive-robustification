@@ -1,6 +1,6 @@
 # Preemptive Image Robustification for Protecting Users against Man-in-the-Middle Adversarial Attacks
 
-This is the code for the paper "Preemptive Image Robustification for Protecting Users against Man-in-the-Middle Adversarial Attacks" submitted to AAAI 2022.
+This is the code for reproducing the results of the paper "Preemptive Image Robustification for Protecting Users against Man-in-the-Middle Adversarial Attacks" accepted at AAAI 2022.
 
 ## Requirements
 
