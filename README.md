@@ -97,25 +97,22 @@ python attack_grey_box.py --config ./configs/cifar10_l2_rand.yaml
 
 ## White-box attacks on preemptively robustified images  
 
-### 1. $\ell_2$ threat model, $\epsilon = \delta = 0.5$
+To conduct white-box attacks on preemptively robustified images, run the following commands. You can specify the attack setting by modifying ```Evaluation``` section in each yaml file. The default attack setting is 20-step PGD.
 
-Run the following command.
+### 1. ℓ<sub>2</sub> threat model, ε = δ = 0.5
+
 ```bash
 python attack_white_box.py --config ./configs/cifar10_l2.yaml
 ```
 
-### 2. $\ell_\infty$ threat model, $\epsilon = \delta = 8/255$
+### 2. ℓ<sub>∞</sub> threat model, ε = δ = 8/255
 
-Run the following command.
 ```bash
 python attack_white_box.py --config ./configs/cifar10_linf.yaml
 ```  
 
-### 3. $\ell_2$ threat model, smoothed network, $\epsilon = \delta = 0.5$
+### 3. ℓ<sub>2</sub> threat model, smoothed network, ε = δ = 0.5
 
-Run the following command.
 ```bash
 python attack_white_box.py --config ./configs/cifar10_l2_rand.yaml
 ```
-
-You can specify the attack setting by modifying ```Evaluation``` section in each yaml file. The default attack setting is 20-step PGD.
