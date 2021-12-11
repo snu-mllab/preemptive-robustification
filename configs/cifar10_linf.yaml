@@ -27,7 +27,7 @@ random_starts: 1
 
 # Evaluation
 batch_size_eval: 50
-attack_type_eval: 'PGDAttackLinfv'
+attack_type_eval: 'PGDAttackLinf'
 num_steps_eval: 20
 bbox_epsilon: 0.03137 # for black-box attack 
 wbox_epsilon_p: 0.03137 # for white-box attack, choose one from {0.00784, 0.01569, 0.02353, 0.03137}
