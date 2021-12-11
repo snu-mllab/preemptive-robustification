@@ -18,14 +18,14 @@ Download the CIFAR-10 dataset from https://www.cs.toronto.edu/~kriz/cifar.html a
 
 ## Training a preemptively robust classifier
 
-### 1. $\ell_2$ threat model, $\epsilon = \delta = 0.5$
+### 1. ℓ<sub>2</sub> threat model, ε = δ = 0.5
 
 Run the following command.
 ```bash
 python train.py --config ./configs/cifar10_l2_model.yaml
 ```
 
-### 2. $\ell_\infty$ threat model, $\epsilon = \delta = 8/255$
+### 2. ℓ<sub>∞</sub> threat model, ε = δ = 8/255
 
 Run the following command.
 ```bash
