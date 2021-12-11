@@ -75,7 +75,7 @@ python reconstruct.py --config ./configs/cifar10_l2_rand.yaml
 ```
 ## Grey-box attacks on preemptively robustified images
 
-To conduct grey-box attacks on preemptively robustified images, run the following commands. You can specify the attack settings by changing the Attack (eval) section in each yaml file. The default attack setting is 20-step PGD.
+To conduct grey-box attacks on preemptively robustified images, run the following commands. You can specify the attack settings by changing the ```Attack (eval)``` section in each yaml file. The default attack setting is 20-step PGD.
 
 ### 1. ℓ<sub>2</sub> threat model, ε = δ = 0.5
 
