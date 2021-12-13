@@ -1,5 +1,6 @@
 # Preemptive Image Robustification for Protecting Users against Man-in-the-Middle Adversarial Attacks
 
+[![DOI](https://zenodo.org/badge/435158242.svg)](https://zenodo.org/badge/latestdoi/435158242)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/snu-mllab/preemptive-robustification/blob/main/LICENSE)
 
 This is the code for reproducing the results of the paper "Preemptive Image Robustification for Protecting Users against Man-in-the-Middle Adversarial Attacks" accepted at AAAI 2022.
