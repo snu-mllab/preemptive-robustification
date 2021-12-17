@@ -118,3 +118,7 @@ python attack_white_box.py --config ./configs/cifar10_linf.yaml
 ```bash
 python attack_white_box.py --config ./configs/cifar10_l2_rand.yaml
 ```
+
+### Acknowledgements
+
+This work was supported in part by SNU-NAVER Hyperscale AI Center and Institute of Information & Communications Technology Planning & Evaluation (IITP) grant funded by the Korea government (MSIT) (No. 2020-0-00882, (SW STAR LAB) Development of deployable learning intelligence via self-sustainable and trustworthy machine learning and No. 2019-0-01371, Development of brain-inspired AI with human-like intelligence). This material is based upon work supported by the Air Force Office of Scientific Research under award number FA2386-20-1-4043.
